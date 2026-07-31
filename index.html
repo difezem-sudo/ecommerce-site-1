@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIFREIND - Mode & Streetwear</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome 6 pour les icônes modernes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- BANNIÈRE PROMOTIONNELLE -->
+  <div class="top-bar">
+    <p>🚚 Livraison express disponible partout au Togo & à l'International | Paiement T-Money & Flooz sécurisé</p>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">
+      <a href="#">DIF<span>REIND</span></a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Rechercher un ensemble, sweat, pantalon...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#hero" class="active">Accueil</a>
+      <a href="#boutique">Catalogue</a>
+      <a href="#" onclick="openAdminModal()">Espace Admin</a>
+    </nav>
+
+    <div class="nav-actions">
+      <div class="icon-btn" id="favBtn" onclick="alert('Vos favoris : ' + favorites.length + ' article(s)')">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge" id="favCount">0</span>
+      </div>
+      <div class="icon-btn" id="cartBtn">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge" id="cartCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="tag">Nouvelle Collection 2026</span>
+      <h1>Style Streetwear & Urban Premium</h1>
+      <p>Découvrez notre sélection exclusive de survêtements, hoodies et cargowares conçus pour votre confort et style.</p>
+      <div class="hero-buttons">
+        <a href="#boutique" class="btn-primary">Découvrir le Catalogue</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGUE & FILTRES -->
+  <section id="boutique" class="shop-section">
+    <div class="section-title">
+      <h2>Nos Articles Tendances</h2>
+      <p>Des vêtements de qualité supérieure sélectionnés pour vous</p>
+    </div>
+
+    <!-- Filtres -->
+    <div class="filter-bar">
+      <div class="category-filters">
+        <button class="filter-btn active" data-category="all">Tous</button>
+        <button class="filter-btn" data-category="ensemble">Ensembles</button>
+        <button class="filter-btn" data-category="pantalons">Pantalons</button>
+        <button class="filter-btn" data-category="vestes">Vestes & Hoodies</button>
+        <button class="filter-btn" data-category="sweats">Sweatshirts</button>
+      </div>
+
+      <div class="sort-filter">
+        <select id="sortSelect">
+          <option value="default">Trier par : Pertinence</option>
+          <option value="low-high">Prix : Croissant</option>
+          <option value="high-low">Prix : Décroissant</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grille Produits -->
+    <div class="product-grid" id="productGrid">
+      <!-- Généré dynamiquement en JS -->
+    </div>
+  </section>
+
+  <!-- MODAL FICHE PRODUIT -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <div class="modal-body" id="modalBody">
+        <!-- Détails dynamiques -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PANIER LATÉRAL -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-bag-shopping"></i> Mon Panier</h3>
+      <span class="close-cart" id="closeCart">&times;</span>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Articles panier -->
+    </div>
+    <div class="cart-footer">
+      <div class="total-row">
+        <span>Total :</span>
+        <span id="cartTotal" class="total-amount">0 FCFA</span>
+      </div>
+
+      <div class="payment-selection">
+        <label for="paymentMethod"><i class="fa-solid fa-shield-halved"></i> Mode de paiement :</label>
+        <select id="paymentMethod">
+          <option value="tmoney">📱 T-Money (Togo)</option>
+          <option value="flooz">📱 Moov Flooz (Togo)</option>
+          <option value="card">💳 Carte Visa / Mastercard</option>
+          <option value="paypal">🅿️ PayPal</option>
+        </select>
+      </div>
+
+      <button class="btn-checkout" onclick="checkout()">Valider la commande</button>
+    </div>
+  </div>
+
+  <!-- MODAL ADMIN -->
+  <div class="modal" id="adminModal">
+    <div class="modal-content admin-card">
+      <span class="close-modal" onclick="closeAdminModal()">&times;</span>
+      <h2><i class="fa-solid fa-user-gear"></i> Espace Administrateur DIFREIND</h2>
+      <div class="admin-stats">
+        <div class="stat-box">
+          <h4>Ventes Totales</h4>
+          <p>450.000 FCFA</p>
+        </div>
+        <div class="stat-box">
+          <h4>Commandes</h4>
+          <p>18 en attente</p>
+        </div>
+        <div class="stat-box">
+          <h4>Stock Produits</h4>
+          <p>120 articles</p>
+        </div>
+      </div>
+      <p style="margin-top:15px; color:#666;">Gestion du catalogue, des stocks et des promotions sécurisée par chiffrement HTTPS.</p>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>DIF<span>REIND</span></h3>
+        <p>Votre boutique e-commerce de référence pour la mode urbaine et tendance au Togo et partout en Afrique.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liens Rapides</h4>
+        <a href="#hero">Accueil</a>
+        <a href="#boutique">Boutique</a>
+        <a href="#">FAQ & Support</a>
+        <a href="#">Conditions de Vente</a>
+      </div>
+      <div class="footer-col">
+        <h4>Paiements Sécurisés</h4>
+        <p><i class="fa-solid fa-mobile-screen-button"></i> T-Money & Moov Flooz</p>
+        <p><i class="fa-solid fa-credit-card"></i> Visa / Mastercard / PayPal</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 DIFREIND. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
