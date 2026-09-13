@@ -1,183 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DIFREIND - Mode & Streetwear</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- FontAwesome 6 pour les icônes modernes -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio professionnel de [VOTRE NOM], Développeur Web & Créateur Digital." />
+    <meta name="theme-color" content="#080b14" />
+    <title>[VOTRE NOM] — Développeur Web & Créateur Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><i></i></div>
+    <div class="noise" aria-hidden="true"></div><div class="cursor-glow" aria-hidden="true"></div>
+    <header class="site-header"><a class="brand" href="#accueil" aria-label="Retour à l'accueil">[VOTRE<span>NOM</span>]</a><button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button><nav aria-label="Navigation principale"><a href="#apropos">À propos</a><a href="#competences">Compétences</a><a href="#projets">Projets</a><a href="#contact" class="nav-cta">Démarrer un projet ↗</a></nav></header>
 
-  <!-- BANNIÈRE PROMOTIONNELLE -->
-  <div class="top-bar">
-    <p>🚚 Livraison express disponible partout au Togo & à l'International | Paiement T-Money & Flooz sécurisé</p>
-  </div>
+    <main>
+      <section class="hero" id="accueil">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-copy reveal"><p class="eyebrow"><i></i> Disponible pour de nouvelles collaborations</p><h1>Je construis des expériences <em>digitales</em> qui comptent.</h1><p class="lead">Développeur Web & Créateur Digital, je transforme les idées ambitieuses en interfaces rapides, intuitives et mémorables.</p><div class="hero-actions"><a class="button primary" href="#projets">Voir mes projets <span>↓</span></a><a class="button ghost" href="#contact">Me contacter</a></div></div>
+        <div class="terminal-card reveal" aria-label="Animation décorative de code"><div class="terminal-top"><span></span><span></span><span></span><p>creative-dev.js</p><b class="live-dot">LIVE</b></div><pre><code><b>const</b> creator = {
+  craft: <i>'digital experiences'</i>,
+  focus: [<i>'web'</i>, <i>'design'</i>, <i>'impact'</i>],
+  status: <strong id="typing">creating</strong><span class="caret">|</span>
+};</code></pre><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="terminal-pulse"></div></div>
+        <a class="scroll-hint" href="#apropos"><span></span> Scroll pour découvrir</a>
+      </section>
 
-  <!-- NAVIGATION -->
-  <header class="navbar">
-    <div class="logo">
-      <a href="#">DIF<span>REIND</span></a>
-    </div>
+      <section class="section about" id="apropos"><div class="section-label reveal">01 / À PROPOS</div><div class="about-layout"><div class="reveal"><h2>Du code clair.<br /><em>Des idées vivantes.</em></h2></div><div class="about-text reveal"><p>Je suis <strong>[VOTRE NOM]</strong>, un créateur digital passionné par le point de rencontre entre technologie, design et stratégie.</p><p>Mon objectif : concevoir des produits numériques utiles et distinctifs, avec une attention particulière à l'expérience utilisateur, à la performance et aux détails.</p><a href="#contact" class="text-link">Échangeons sur votre idée <span>→</span></a></div></div><div class="metrics reveal"><div><b data-count="3">0</b><span>piliers : code, design, impact</span></div><div><b data-count="100">0</b><span>% d'attention aux détails</span></div><div><b data-count="1">0</b><span>objectif : faire la différence</span></div></div></section>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Rechercher un ensemble, sweat, pantalon...">
-      <button><i class="fa-solid fa-magnifying-glass"></i></button>
-    </div>
+      <section class="section skills" id="competences"><div class="section-label reveal">02 / COMPÉTENCES</div><div class="section-heading reveal"><h2>Un stack pensé pour<br /><em>créer sans limites.</em></h2><p>Des fondations techniques solides, enrichies d'une approche créative et orientée résultats.</p></div><div class="skill-grid" id="skillGrid"></div></section>
 
-    <nav class="nav-links">
-      <a href="#hero" class="active">Accueil</a>
-      <a href="#boutique">Catalogue</a>
-      <a href="#" onclick="openAdminModal()">Espace Admin</a>
-    </nav>
+      <section class="section projects" id="projets"><div class="projects-head"><div><div class="section-label reveal">03 / PROJETS SÉLECTIONNÉS</div><h2 class="reveal">Quelques idées<br /><em>devenues réelles.</em></h2></div><a class="text-link reveal" href="#contact">Parlons du vôtre <span>→</span></a></div><div class="project-grid" id="projectGrid"></div></section>
 
-    <div class="nav-actions">
-      <div class="icon-btn" id="favBtn" onclick="alert('Vos favoris : ' + favorites.length + ' article(s)')">
-        <i class="fa-regular fa-heart"></i>
-        <span class="badge" id="favCount">0</span>
-      </div>
-      <div class="icon-btn" id="cartBtn">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="badge" id="cartCount">0</span>
-      </div>
-    </div>
-  </header>
+      <section class="section services" id="services"><div class="section-label reveal">04 / SERVICES</div><div class="services-layout"><h2 class="reveal">De l'idée au<br /><em>lancement.</em></h2><div class="service-list reveal"><article><span>01</span><div><h3>Création de sites web</h3><p>Sites vitrines et expériences web performantes, pensés pour votre audience.</p></div><b>↗</b></article><article><span>02</span><div><h3>Design UI/UX</h3><p>Interfaces claires, identités digitales cohérentes et parcours intuitifs.</p></div><b>↗</b></article><article><span>03</span><div><h3>Développement frontend</h3><p>Intégration responsive, animations utiles et interfaces maintenables.</p></div><b>↗</b></article><article><span>04</span><div><h3>Création de projets digitaux</h3><p>Prototypes et produits numériques adaptés à un besoin concret.</p></div><b>↗</b></article><article><span>05</span><div><h3>Marketing digital</h3><p>Création de supports et idées de campagnes pour faire rayonner une marque.</p></div><b>↗</b></article><article><span>06</span><div><h3>Assistance informatique</h3><p>Accompagnement technique et conseils pour gagner en sérénité.</p></div><b>↗</b></article></div></div></section>
 
-  <!-- HERO SECTION -->
-  <section id="hero" class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="tag">Nouvelle Collection 2026</span>
-      <h1>Style Streetwear & Urban Premium</h1>
-      <p>Découvrez notre sélection exclusive de survêtements, hoodies et cargowares conçus pour votre confort et style.</p>
-      <div class="hero-buttons">
-        <a href="#boutique" class="btn-primary">Découvrir le Catalogue</a>
-      </div>
-    </div>
-  </section>
+      <section class="section journey"><div class="section-label reveal">05 / PARCOURS</div><div class="timeline"><article class="reveal"><span>AUJOURD'HUI</span><div><h3>Créateur digital indépendant</h3><p>Conception de solutions web modernes, du brief à la mise en ligne.</p></div></article><article class="reveal"><span>EN CONTINU</span><div><h3>Veille & apprentissage</h3><p>Exploration constante du développement, de la cybersécurité et des nouvelles pratiques digitales.</p></div></article><article class="reveal"><span>VOTRE ÉTAPE</span><div><h3>Ajoutez votre parcours</h3><p>Remplacez ce contenu par vos formations, expériences et certifications.</p></div></article></div></section>
 
-  <!-- CATALOGUE & FILTRES -->
-  <section id="boutique" class="shop-section">
-    <div class="section-title">
-      <h2>Nos Articles Tendances</h2>
-      <p>Des vêtements de qualité supérieure sélectionnés pour vous</p>
-    </div>
-
-    <!-- Filtres -->
-    <div class="filter-bar">
-      <div class="category-filters">
-        <button class="filter-btn active" data-category="all">Tous</button>
-        <button class="filter-btn" data-category="ensemble">Ensembles</button>
-        <button class="filter-btn" data-category="pantalons">Pantalons</button>
-        <button class="filter-btn" data-category="vestes">Vestes & Hoodies</button>
-        <button class="filter-btn" data-category="sweats">Sweatshirts</button>
-      </div>
-
-      <div class="sort-filter">
-        <select id="sortSelect">
-          <option value="default">Trier par : Pertinence</option>
-          <option value="low-high">Prix : Croissant</option>
-          <option value="high-low">Prix : Décroissant</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Grille Produits -->
-    <div class="product-grid" id="productGrid">
-      <!-- Généré dynamiquement en JS -->
-    </div>
-  </section>
-
-  <!-- MODAL FICHE PRODUIT -->
-  <div class="modal" id="productModal">
-    <div class="modal-content">
-      <span class="close-modal" id="closeModal">&times;</span>
-      <div class="modal-body" id="modalBody">
-        <!-- Détails dynamiques -->
-      </div>
-    </div>
-  </div>
-
-  <!-- PANIER LATÉRAL -->
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h3><i class="fa-solid fa-bag-shopping"></i> Mon Panier</h3>
-      <span class="close-cart" id="closeCart">&times;</span>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <!-- Articles panier -->
-    </div>
-    <div class="cart-footer">
-      <div class="total-row">
-        <span>Total :</span>
-        <span id="cartTotal" class="total-amount">0 FCFA</span>
-      </div>
-
-      <div class="payment-selection">
-        <label for="paymentMethod"><i class="fa-solid fa-shield-halved"></i> Mode de paiement :</label>
-        <select id="paymentMethod">
-          <option value="tmoney">📱 T-Money (Togo)</option>
-          <option value="flooz">📱 Moov Flooz (Togo)</option>
-          <option value="card">💳 Carte Visa / Mastercard</option>
-          <option value="paypal">🅿️ PayPal</option>
-        </select>
-      </div>
-
-      <button class="btn-checkout" onclick="checkout()">Valider la commande</button>
-    </div>
-  </div>
-
-  <!-- MODAL ADMIN -->
-  <div class="modal" id="adminModal">
-    <div class="modal-content admin-card">
-      <span class="close-modal" onclick="closeAdminModal()">&times;</span>
-      <h2><i class="fa-solid fa-user-gear"></i> Espace Administrateur DIFREIND</h2>
-      <div class="admin-stats">
-        <div class="stat-box">
-          <h4>Ventes Totales</h4>
-          <p>450.000 FCFA</p>
-        </div>
-        <div class="stat-box">
-          <h4>Commandes</h4>
-          <p>18 en attente</p>
-        </div>
-        <div class="stat-box">
-          <h4>Stock Produits</h4>
-          <p>120 articles</p>
-        </div>
-      </div>
-      <p style="margin-top:15px; color:#666;">Gestion du catalogue, des stocks et des promotions sécurisée par chiffrement HTTPS.</p>
-    </div>
-  </div>
-
-  <div class="overlay" id="overlay"></div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-col">
-        <h3>DIF<span>REIND</span></h3>
-        <p>Votre boutique e-commerce de référence pour la mode urbaine et tendance au Togo et partout en Afrique.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Liens Rapides</h4>
-        <a href="#hero">Accueil</a>
-        <a href="#boutique">Boutique</a>
-        <a href="#">FAQ & Support</a>
-        <a href="#">Conditions de Vente</a>
-      </div>
-      <div class="footer-col">
-        <h4>Paiements Sécurisés</h4>
-        <p><i class="fa-solid fa-mobile-screen-button"></i> T-Money & Moov Flooz</p>
-        <p><i class="fa-solid fa-credit-card"></i> Visa / Mastercard / PayPal</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 DIFREIND. Tous droits réservés.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+      <section class="contact" id="contact"><div class="contact-copy reveal"><p class="eyebrow"><i></i> UNE IDÉE À CONCRÉTISER ?</p><h2>Créons quelque chose de <em>marquant.</em></h2><p>Décrivez votre projet, votre besoin ou votre prochaine ambition. Je vous répondrai via les coordonnées que vous configurerez.</p><div class="socials"><a href="#" aria-label="WhatsApp — à configurer">Wa</a><a href="#" aria-label="GitHub — à configurer">Gh</a><a href="#" aria-label="LinkedIn — à configurer">in</a><a href="#" aria-label="TikTok — à configurer">Tk</a></div></div><form class="contact-form reveal" id="contactForm"><label>Votre nom<input name="name" autocomplete="name" placeholder="Votre nom" required /></label><label>Votre email<input name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" required /></label><label>Votre message<textarea name="message" placeholder="Parlez-moi de votre projet..." required></textarea></label><button class="button primary" type="submit">Envoyer le message <span>↗</span></button><p class="form-status" role="status"></p></form></section>
+    </main>
+    <footer><a class="brand" href="#accueil">[VOTRE<span>NOM</span>]</a><p>Développeur Web & Créateur Digital</p><div><a href="#apropos">À propos</a><a href="#projets">Projets</a><a href="#contact">Contact</a></div><small>© <span id="year"></span> [VOTRE NOM]. Conçu avec HTML, CSS & JavaScript.</small></footer>
+    <script src="script.js"></script>
+  </body>
 </html>
