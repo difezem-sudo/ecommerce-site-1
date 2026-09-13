@@ -1,236 +1,30 @@
-// Vos photos de produits intégrées
-const products = [
-  {
-    id: 1,
-    name: "Ensemble Survêtement Nike NOCTA Bleu Ciel",
-    category: "ensemble",
-    price: 35000,
-    rating: "5.0 ★ (24 avis)",
-    description: "Ensemble veste zippée à capuche et pantalon assorti Nike NOCTA bleu ciel. Tissu molletonné ultra confort et coupe moderne.",
-    image: "45ff8ce59d6a3ff97f220bec7836fc05.jpg"
-  },
-  {
-    id: 2,
-    name: "Pantalon Cargo Streetwear 3 Bandes",
-    category: "pantalons",
-    price: 18000,
-    rating: "4.8 ★ (18 avis)",
-    description: "Pantalon de survêtement style cargo oversized disponible en Gris et Noir. Finitions ajustables avec bandes latérales.",
-    image: "54d5a5dd35b39425ce680533f3d1583d.jpg"
-  },
-  {
-    id: 3,
-    name: "Veste Hoodie Cagoule Streetwear Marine & Blanc",
-    category: "vestes",
-    price: 28000,
-    rating: "4.9 ★ (31 avis)",
-    description: "Veste bicolore zippée avec capuche intégrée style cagoule balaclava. Coupe oversize tendance et design futuriste.",
-    image: "17f54f8ca90d6de060f02e606c4eec9c.jpg"
-  },
-  {
-    id: 4,
-    name: "Sweatshirt Brooklyn New York Oversize Noir",
-    category: "sweats",
-    price: 15000,
-    rating: "4.7 ★ (12 avis)",
-    description: "Sweat sans capuche col rond avec impression rétro 'Brooklyn New York'. Tissu épais doux et confortable.",
-    image: "5f20a4ef2d732d4e4df62680cf042499.jpg"
-  }
+/* Configuration rapide : modifiez ici les compétences et projets affichés. */
+const skills = [
+  ['HTML', 92], ['CSS', 90], ['JavaScript', 84], ['Python', 72], ['C#', 68],
+  ['Git / GitHub', 85], ['Linux', 73], ['Cybersécurité', 70], ['UI/UX', 82], ['Marketing digital', 75]
 ];
+const projects = [
+  { title: 'Portfolio personnel', type: 'WEB DESIGN / 01', desc: 'Une présence en ligne immersive pour présenter un univers, un savoir-faire et des réalisations.', tags: ['HTML', 'CSS', 'JS'], gradient: 'radial-gradient(circle at 75% 20%,#7d67d7 0,transparent 28%),linear-gradient(135deg,#202855,#111426)' },
+  { title: 'Projet web', type: 'PLATEFORME / 02', desc: 'Une interface web responsive qui rend un service clair, rapide et agréable à utiliser.', tags: ['UI/UX', 'Frontend'], gradient: 'radial-gradient(circle at 20% 20%,#229b9c 0,transparent 27%),linear-gradient(145deg,#11383f,#101827)' },
+  { title: 'Projet cybersécurité', type: 'SÉCURITÉ / 03', desc: 'Un concept de tableau de bord pour visualiser les indicateurs de sécurité essentiels.', tags: ['Linux', 'Python'], gradient: 'radial-gradient(circle at 70% 20%,#d37a6c 0,transparent 22%),linear-gradient(145deg,#472532,#171424)' },
+  { title: 'Projet application', type: 'APPLICATION / 04', desc: 'Un concept d’application utile, imaginé avec une navigation simple et une identité forte.', tags: ['UI/UX', 'JavaScript'], gradient: 'radial-gradient(circle at 18% 20%,#628ddc 0,transparent 25%),linear-gradient(145deg,#1d315d,#151824)' },
+  { title: 'Projet marketing digital', type: 'CRÉATIVITÉ / 05', desc: 'Une campagne digitale pensée pour engager une communauté et donner de l’élan à une marque.', tags: ['Stratégie', 'Création'], gradient: 'radial-gradient(circle at 25% 15%,#d5a350 0,transparent 25%),linear-gradient(145deg,#49361b,#1c1724)' }
+];
+const skillGrid = document.querySelector('#skillGrid');
+const projectGrid = document.querySelector('#projectGrid');
 
-let cart = [];
-let favorites = [];
+skillGrid.innerHTML = skills.map(([name, level]) => `<article class="skill-card reveal"><div class="skill-top"><h3>${name}</h3><span>${level}%</span></div><div class="skill-bar"><i data-level="${level}"></i></div></article>`).join('');
+projectGrid.innerHTML = projects.map((project, index) => `<article class="project-card reveal" style="--card-gradient:${project.gradient}"><span class="project-number">0${index + 1}</span><div class="project-type">${project.type}</div><h3>${project.title}</h3><p>${project.desc}</p><div class="project-bottom"><div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div><div class="project-actions"><a href="#contact">Voir le projet ↗</a><a href="#" aria-label="GitHub du projet — à configurer">GitHub</a></div></div></article>`).join('');
 
-// Éléments du DOM
-const productGrid = document.getElementById('productGrid');
-const cartSidebar = document.getElementById('cartSidebar');
-const cartBtn = document.getElementById('cartBtn');
-const closeCart = document.getElementById('closeCart');
-const overlay = document.getElementById('overlay');
-const cartItemsContainer = document.getElementById('cartItems');
-const cartTotal = document.getElementById('cartTotal');
-const cartCount = document.getElementById('cartCount');
-const favCount = document.getElementById('favCount');
-const searchInput = document.getElementById('searchInput');
-const sortSelect = document.getElementById('sortSelect');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); entry.target.querySelectorAll?.('.skill-bar i').forEach(bar => { bar.style.width = `${bar.dataset.level}%`; }); entry.target.querySelectorAll?.('[data-count]').forEach(counter => { const value = Number(counter.dataset.count); if (reducedMotion) { counter.textContent = value; return; } const start = performance.now(); const animate = now => { const current = Math.min(value, Math.round((now - start) / 900 * value)); counter.textContent = current; if (current < value) requestAnimationFrame(animate); }; requestAnimationFrame(animate); }); observer.unobserve(entry.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal, #skillGrid').forEach(element => observer.observe(element));
 
-// Affichage des produits
-function displayProducts(items) {
-  productGrid.innerHTML = items.map(product => {
-    const isFav = favorites.includes(product.id);
-    return `
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="${product.image}" alt="${product.name}" onclick="openProductModal(${product.id})">
-          <div class="fav-icon ${isFav ? 'active' : ''}" onclick="toggleFavorite(${product.id})">
-            <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
-          </div>
-        </div>
-        <div class="product-info">
-          <span class="category">${product.category}</span>
-          <h3 onclick="openProductModal(${product.id})" style="cursor:pointer;">${product.name}</h3>
-          <div class="rating">${product.rating}</div>
-          <div class="price-row">
-            <span class="price">${product.price.toLocaleString()} FCFA</span>
-            <button class="btn-add-cart" onclick="addToCart(${product.id})">
-              <i class="fa-solid fa-plus"></i> Ajouter
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
+document.querySelector('#year').textContent = new Date().getFullYear();
+const statuses = ['imagining', 'designing', 'building', 'creating']; let statusIndex = 0;
+if (!reducedMotion) setInterval(() => { const target = document.querySelector('#typing'); target.style.opacity = 0; setTimeout(() => { statusIndex = (statusIndex + 1) % statuses.length; target.textContent = statuses[statusIndex]; target.style.opacity = 1; }, 180); }, 2100);
 
-// Favoris
-function toggleFavorite(id) {
-  if (favorites.includes(id)) {
-    favorites = favorites.filter(favId => favId !== id);
-  } else {
-    favorites.push(id);
-  }
-  favCount.textContent = favorites.length;
-  displayProducts(products);
-}
-
-// Ajouter au Panier
-function addToCart(id) {
-  const product = products.find(p => p.id === id);
-  const existing = cart.find(item => item.id === id);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ ...product, quantity: 1, size: 'M' });
-  }
-
-  updateCart();
-  openCart();
-}
-
-// Mise à jour du panier UI
-function updateCart() {
-  cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  cartItemsContainer.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <img src="${item.image}" alt="${item.name}">
-      <div class="cart-item-details" style="flex:1;">
-        <h4>${item.name}</h4>
-        <p>${item.price.toLocaleString()} FCFA (x${item.quantity})</p>
-      </div>
-      <button onclick="removeFromCart(${item.id})" style="border:none; background:none; color:#ef4444; cursor:pointer;">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-    </div>
-  `).join('');
-
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  cartTotal.textContent = `${total.toLocaleString()} FCFA`;
-}
-
-function removeFromCart(id) {
-  cart = cart.filter(item => item.id !== id);
-  updateCart();
-}
-
-// Panier Sidebar
-function openCart() {
-  cartSidebar.classList.add('active');
-  overlay.classList.add('active');
-}
-
-function closeCart() {
-  cartSidebar.classList.remove('active');
-  overlay.classList.remove('active');
-}
-
-cartBtn.addEventListener('click', openCart);
-closeCart.addEventListener('click', closeCart);
-overlay.addEventListener('click', closeCart);
-
-// Fiche Produit Modal
-function openProductModal(id) {
-  const p = products.find(item => item.id === id);
-  const modal = document.getElementById('productModal');
-  const modalBody = document.getElementById('modalBody');
-
-  modalBody.innerHTML = `
-    <div>
-      <img src="${p.image}" alt="${p.name}">
-    </div>
-    <div>
-      <span class="category" style="color:var(--primary); font-weight:bold;">${p.category.toUpperCase()}</span>
-      <h2>${p.name}</h2>
-      <p style="color:#f59e0b; margin: 5px 0;">${p.rating}</p>
-      <h3 style="color:var(--primary); font-size:1.5rem; margin:10px 0;">${p.price.toLocaleString()} FCFA</h3>
-      <p style="color:#64748b; font-size:0.9rem; margin-bottom:15px;">${p.description}</p>
-      
-      <div class="size-selector" style="margin-bottom:15px;">
-        <label><b>Taille :</b></label><br>
-        <button>S</button><button style="background:var(--primary); color:white;">M</button><button>L</button><button>XL</button>
-      </div>
-
-      <button class="btn-primary" style="width:100%; border:none; cursor:pointer;" onclick="addToCart(${p.id}); closeModal();">
-        Ajouter au panier
-      </button>
-    </div>
-  `;
-
-  modal.classList.add('active');
-  overlay.classList.add('active');
-}
-
-function closeModal() {
-  document.getElementById('productModal').classList.remove('active');
-  overlay.classList.remove('active');
-}
-
-document.getElementById('closeModal').addEventListener('click', closeModal);
-
-// Espace Admin
-function openAdminModal() {
-  document.getElementById('adminModal').classList.add('active');
-  overlay.classList.add('active');
-}
-function closeAdminModal() {
-  document.getElementById('adminModal').classList.remove('active');
-  overlay.classList.remove('active');
-}
-
-// Filtres et Recherche
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelector('.filter-btn.active').classList.remove('active');
-    btn.classList.add('active');
-
-    const cat = btn.dataset.category;
-    if (cat === 'all') displayProducts(products);
-    else displayProducts(products.filter(p => p.category === cat));
-  });
-});
-
-searchInput.addEventListener('input', (e) => {
-  const term = e.target.value.toLowerCase();
-  displayProducts(products.filter(p => p.name.toLowerCase().includes(term)));
-});
-
-sortSelect.addEventListener('change', (e) => {
-  let sorted = [...products];
-  if (e.target.value === 'low-high') sorted.sort((a,b) => a.price - b.price);
-  if (e.target.value === 'high-low') sorted.sort((a,b) => b.price - a.price);
-  displayProducts(sorted);
-});
-
-// Checkout Simulation
-function checkout() {
-  if (cart.length === 0) return alert('Votre panier est vide.');
-  const method = document.getElementById('paymentMethod').value;
-  alert(`Merci pour votre commande chez DIFREIND !\nMode de règlement sélectionné : ${method.toUpperCase()}.\nUn SMS de confirmation vous a été envoyé.`);
-  cart = [];
-  updateCart();
-  closeCart();
-}
-
-// Initialisation
-displayProducts(products);
+document.querySelector('.menu-toggle').addEventListener('click', event => { const nav = document.querySelector('nav'); nav.classList.toggle('open'); event.currentTarget.setAttribute('aria-expanded', nav.classList.contains('open')); });
+document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => document.querySelector('nav').classList.remove('open')));
+document.querySelector('#contactForm').addEventListener('submit', event => { event.preventDefault(); document.querySelector('.form-status').textContent = 'Message prêt — configurez votre service d’envoi ou adresse email dans script.js.'; event.currentTarget.reset(); });
+if (!reducedMotion && window.matchMedia('(pointer:fine)').matches) document.addEventListener('pointermove', event => { document.querySelector('.cursor-glow').style.transform = `translate(${event.clientX - 256}px, ${event.clientY - 256}px)`; });
